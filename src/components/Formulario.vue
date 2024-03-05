@@ -9,6 +9,18 @@ const paciente = reactive({
     alta: "",
     sintomas: "",
 });
+
+const validar = () => {
+    // Esto seria lo que usamos generalmente pero en Vue se puede acortar este paso
+    // e.preventDefault(); Eliminarmos esta linea, la dejamos como una arrowFuncion normal y usamos lo que se llama modificadores de eventos @submit.prevent
+    console.log("Validando");
+    if ([nombre.value, propietario.value].includes("")) {
+        return console.log("Campo nombre y propietario son obligatorios");
+    }
+    if (Object.values(paciente).includes("")) {
+        return console.log("Todos los campos son obligatorios");
+    }
+};
 </script>
 <template>
     <div class="md:w-1/2">
@@ -19,7 +31,10 @@ const paciente = reactive({
             Añade Pacientes y
             <span class="text-indigo-600">Administralos</span>
         </p>
-        <form class="bg-white shadow-md rounded-lg py-10 px-5 mb-10">
+        <form
+            class="bg-white shadow-md rounded-lg py-10 px-5 mb-10"
+            @submit.prevent="validar"
+        >
             <div class="mb-5">
                 <label
                     for="mascota"

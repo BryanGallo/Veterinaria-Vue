@@ -1,4 +1,15 @@
-<script setup></script>
+<script setup>
+import { ref, reactive } from "vue";
+
+const nombre = ref("");
+const propietario = ref("");
+
+const paciente = reactive({
+    email: "",
+    alta: "",
+    sintomas: "",
+});
+</script>
 <template>
     <div class="md:w-1/2">
         <h2 class="font-black text-3xl text-center">
@@ -21,6 +32,8 @@
                     type="text"
                     placeholder="Nombre de la Mascota"
                     class="border-2 w-full p-2 mt-2 placeholder-gray-400 rounded-md"
+                    :value="nombre"
+                    v-on:input="(e) => (nombre = e.target.value)"
                 />
             </div>
             <div class="mb-5">
@@ -35,7 +48,10 @@
                     type="text"
                     placeholder="Nombre del Propietario"
                     class="border-2 w-full p-2 mt-2 placeholder-gray-400 rounded-md"
+                    v-model="propietario"
                 />
+                <!-- v-model es lo mismo que :value="nombre"
+                    v-on:input="(e) => (nombre = e.target.value)"-->
             </div>
             <div class="mb-5">
                 <label
@@ -49,6 +65,7 @@
                     type="email"
                     placeholder="Email del Propietario"
                     class="border-2 w-full p-2 mt-2 placeholder-gray-400 rounded-md"
+                    v-model="paciente.email"
                 />
             </div>
             <div class="mb-5">
@@ -62,6 +79,7 @@
                     id="alta"
                     type="date"
                     class="border-2 w-full p-2 mt-2 placeholder-gray-400 rounded-md"
+                    v-model="paciente.alta"
                 />
             </div>
             <div class="mb-5">
@@ -75,6 +93,7 @@
                     id="sintomas"
                     placeholder="Describe los Sintomas"
                     class="border-2 w-full p-2 mt-2 placeholder-gray-400 rounded-md"
+                    v-model="paciente.sintomas"
                 >
                 </textarea>
             </div>
@@ -86,3 +105,4 @@
         </form>
     </div>
 </template>
+import { fromJSON } from 'postcss';

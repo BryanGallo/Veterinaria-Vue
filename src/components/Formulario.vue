@@ -2,35 +2,51 @@
 import { ref, reactive } from "vue";
 import Alerta from "./Alerta.vue";
 
-const nombre = ref("");
-const propietario = ref("");
-
-const paciente = reactive({
-    email: "",
-    alta: "",
-    sintomas: "",
-});
-
 const alerta = reactive({
     mensaje: "",
     tipo: "",
 });
 
+const props = defineProps({
+    nombre: {
+        type: String,
+        required: true,
+    },
+    propietario: {
+        type: String,
+        required: true,
+    },
+    email: {
+        type: String,
+        required: true,
+    },
+    alta: {
+        type: String,
+        required: true,
+    },
+    sintomas: {
+        type: String,
+        required: true,
+    },
+});
+
+defineEmits([
+    "update:nombre",
+    "update:propietario",
+    "update:email",
+    "update:alta",
+    "update:sintomas",
+]);
+
 const validar = () => {
     // Esto seria lo que usamos generalmente pero en Vue se puede acortar este paso
     // e.preventDefault(); Eliminarmos esta linea, la dejamos como una arrowFuncion normal y usamos lo que se llama modificadores de eventos @submit.prevent
     console.log("Validando");
-    if ([nombre.value, propietario.value].includes("")) {
-        console.log("Campo nombre y propietario son obligatorios");
-        alerta.mensaje = "Campo nombre y propietario son obligatorios";
-        alerta.tipo='error'
-        return
-    }
-    if (Object.values(paciente).includes("")) {
+    if (Object.values(props).includes("")) {
         console.log("Todos los campos son obligatorios");
         alerta.mensaje = "Todos los campos son obligatorios";
-        alerta.tipo='error'
-        return 
+        alerta.tipo = "error";
+        return;
     }
 };
 </script>
@@ -61,7 +77,7 @@ const validar = () => {
                     placeholder="Nombre de la Mascota"
                     class="border-2 w-full p-2 mt-2 placeholder-gray-400 rounded-md"
                     :value="nombre"
-                    v-on:input="(e) => (nombre = e.target.value)"
+                    @input="$emit('update:nombre', $event.target.value)"
                 />
             </div>
             <div class="mb-5">
@@ -76,9 +92,11 @@ const validar = () => {
                     type="text"
                     placeholder="Nombre del Propietario"
                     class="border-2 w-full p-2 mt-2 placeholder-gray-400 rounded-md"
-                    v-model="propietario"
+                    :value="propietario"
+                    @input="$emit('update:propietario', $event.target.value)"
                 />
-                <!-- v-model es lo mismo que :value="nombre"
+                <!-- v-model="propietario" es lo mismo que 
+                    :value="nombre"
                     v-on:input="(e) => (nombre = e.target.value)"-->
             </div>
             <div class="mb-5">
@@ -93,7 +111,8 @@ const validar = () => {
                     type="email"
                     placeholder="Email del Propietario"
                     class="border-2 w-full p-2 mt-2 placeholder-gray-400 rounded-md"
-                    v-model="paciente.email"
+                    :value="email"
+                    @input="$emit('update:email', $event.target.value)"
                 />
             </div>
             <div class="mb-5">
@@ -107,7 +126,8 @@ const validar = () => {
                     id="alta"
                     type="date"
                     class="border-2 w-full p-2 mt-2 placeholder-gray-400 rounded-md"
-                    v-model="paciente.alta"
+                    :value="alta"
+                    @input="$emit('update:alta', $event.target.value)"
                 />
             </div>
             <div class="mb-5">
@@ -121,7 +141,8 @@ const validar = () => {
                     id="sintomas"
                     placeholder="Describe los Sintomas"
                     class="border-2 w-full p-2 mt-2 placeholder-gray-400 rounded-md"
-                    v-model="paciente.sintomas"
+                    :value="sintomas"
+                    @input="$emit('update:sintomas', $event.target.value)"
                 >
                 </textarea>
             </div>

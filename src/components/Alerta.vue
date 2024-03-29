@@ -3,7 +3,7 @@ import { computed } from "vue";
 const props = defineProps({
     alerta: {
         type: Object,
-        require: true,
+        required: true,
     },
 });
 //Se una un computed property debido a que es reactivo y es una forma de mantener el template limpio

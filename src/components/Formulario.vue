@@ -30,12 +30,13 @@ const props = defineProps({
     },
 });
 
-defineEmits([
+const emit = defineEmits([
     "update:nombre",
     "update:propietario",
     "update:email",
     "update:alta",
     "update:sintomas",
+    "guardar-paciente",
 ]);
 
 const validar = () => {
@@ -48,6 +49,8 @@ const validar = () => {
         alerta.tipo = "error";
         return;
     }
+
+    emit("guardar-paciente")
 };
 </script>
 <template>
@@ -75,7 +78,7 @@ const validar = () => {
                     id="mascota"
                     type="text"
                     placeholder="Nombre de la Mascota"
-                    class="border-2 w-full p-2 mt-2 placeholder-gray-400 rounded-md"
+                    class="border-2 w-full p-2 mt-2 placeholder-gray-400 rounded-md uppercase"
                     :value="nombre"
                     @input="$emit('update:nombre', $event.target.value)"
                 />
@@ -91,7 +94,7 @@ const validar = () => {
                     id="propietario"
                     type="text"
                     placeholder="Nombre del Propietario"
-                    class="border-2 w-full p-2 mt-2 placeholder-gray-400 rounded-md"
+                    class="border-2 w-full p-2 mt-2 placeholder-gray-400 rounded-md uppercase"
                     :value="propietario"
                     @input="$emit('update:propietario', $event.target.value)"
                 />
@@ -110,7 +113,7 @@ const validar = () => {
                     id="email"
                     type="email"
                     placeholder="Email del Propietario"
-                    class="border-2 w-full p-2 mt-2 placeholder-gray-400 rounded-md"
+                    class="border-2 w-full p-2 mt-2 placeholder-gray-400 rounded-md lowercase"
                     :value="email"
                     @input="$emit('update:email', $event.target.value)"
                 />
@@ -140,7 +143,7 @@ const validar = () => {
                 <textarea
                     id="sintomas"
                     placeholder="Describe los Sintomas"
-                    class="border-2 w-full p-2 mt-2 placeholder-gray-400 rounded-md"
+                    class="border-2 w-full p-2 mt-2 placeholder-gray-400 rounded-md uppercase"
                     :value="sintomas"
                     @input="$emit('update:sintomas', $event.target.value)"
                 >

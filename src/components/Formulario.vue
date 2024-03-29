@@ -80,7 +80,7 @@ const validar = () => {
                     placeholder="Nombre de la Mascota"
                     class="border-2 w-full p-2 mt-2 placeholder-gray-400 rounded-md uppercase"
                     :value="nombre"
-                    @input="$emit('update:nombre', $event.target.value)"
+                    @input="$emit('update:nombre', $event.target.value.toUpperCase())"
                 />
             </div>
             <div class="mb-5">
@@ -96,7 +96,7 @@ const validar = () => {
                     placeholder="Nombre del Propietario"
                     class="border-2 w-full p-2 mt-2 placeholder-gray-400 rounded-md uppercase"
                     :value="propietario"
-                    @input="$emit('update:propietario', $event.target.value)"
+                    @input="$emit('update:propietario', $event.target.value.toUpperCase())"
                 />
                 <!-- v-model="propietario" es lo mismo que 
                     :value="nombre"
@@ -115,7 +115,7 @@ const validar = () => {
                     placeholder="Email del Propietario"
                     class="border-2 w-full p-2 mt-2 placeholder-gray-400 rounded-md lowercase"
                     :value="email"
-                    @input="$emit('update:email', $event.target.value)"
+                    @input="$emit('update:email', $event.target.value.toLowerCase())"
                 />
             </div>
             <div class="mb-5">
@@ -145,7 +145,7 @@ const validar = () => {
                     placeholder="Describe los Sintomas"
                     class="border-2 w-full p-2 mt-2 placeholder-gray-400 rounded-md uppercase"
                     :value="sintomas"
-                    @input="$emit('update:sintomas', $event.target.value)"
+                    @input="$emit('update:sintomas', $event.target.value.toUpperCase())"
                 >
                 </textarea>
             </div>

@@ -2,7 +2,8 @@
 import { ref, reactive } from "vue";
 import Header from "./components/Header.vue";
 import Formulario from "./components/Formulario.vue";
-
+import Paciente from "./components/Paciente.vue";
+import ListadoPacientes from "./components/ListadoPacientes.vue";
 const pacientes = ref([]);
 
 const paciente = reactive({
@@ -14,7 +15,8 @@ const paciente = reactive({
 });
 
 const guardarPaciente = () => {
-    pacientes.value.push(paciente)
+    pacientes.value.push(paciente);
+
 };
 </script>
 
@@ -30,15 +32,7 @@ const guardarPaciente = () => {
                 v-model:sintomas="paciente.sintomas"
                 @guardar-paciente="guardarPaciente"
             />
-            <div class="md:w-1/2 md:h-screen overflow-y-scroll">
-                <h3 class="font-black text-3xl text-center">
-                    Administra tus pacientes
-                </h3>
-                <div v-if="pacientes.length > 0" class="text-center"></div>
-                <p v-else class="text-center text-2xl mt-10">
-                    No existen pacientes agregalos
-                </p>
-            </div>
+            <ListadoPacientes :pacientes="pacientes" />
         </div>
     </div>
 </template>

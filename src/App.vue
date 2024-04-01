@@ -27,6 +27,11 @@ const guardarPaciente = () => {
         sintomas: "",
     });
 };
+
+const actualizarPaciente = (paciente) => {
+    console.log("Actualizando");
+    console.log(paciente);
+};
 </script>
 
 <template>
@@ -41,7 +46,10 @@ const guardarPaciente = () => {
                 v-model:sintomas="paciente.sintomas"
                 @guardar-paciente="guardarPaciente"
             />
-            <ListadoPacientes :pacientes="pacientes" />
+            <ListadoPacientes
+                :pacientes="pacientes"
+                @actualizar-paciente="actualizarPaciente"
+            />
         </div>
     </div>
 </template>

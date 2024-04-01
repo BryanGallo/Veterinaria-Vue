@@ -1,5 +1,7 @@
 <script setup>
 import Paciente from "./Paciente.vue";
+
+defineEmits(["actualizar-paciente"]);
 const props = defineProps({
     pacientes: {
         type: Array,
@@ -19,7 +21,13 @@ const props = defineProps({
             </span>
         </p>
         <div v-if="pacientes.length > 0" class="text-center">
-            <Paciente v-for="paciente in pacientes" :paciente="paciente" />
+            <Paciente
+                v-for="paciente in pacientes"
+                :paciente="paciente"
+                @actualizar-paciente="
+                    ($event) => $emit('actualizar-paciente', $event)
+                "
+            />
         </div>
         <p v-else class="text-center text-2xl mt-10">
             No existen pacientes agregalos

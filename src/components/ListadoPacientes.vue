@@ -25,7 +25,7 @@ const props = defineProps({
                 v-for="paciente in pacientes"
                 :paciente="paciente"
                 @actualizar-paciente="
-                    ($event) => $emit('actualizar-paciente', $event)
+                    (id) => $emit('actualizar-paciente', id)
                 "
             />
         </div>

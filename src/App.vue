@@ -3,7 +3,6 @@ import { ref, reactive } from "vue";
 import { uid } from "uid";
 import Header from "./components/Header.vue";
 import Formulario from "./components/Formulario.vue";
-import Paciente from "./components/Paciente.vue";
 import ListadoPacientes from "./components/ListadoPacientes.vue";
 const pacientes = ref([]);
 
@@ -17,20 +16,36 @@ const paciente = reactive({
 });
 
 const guardarPaciente = () => {
-    pacientes.value.push({ ...paciente, id: uid() });
-
+    if (paciente.id) {
+        console.log(paciente.id);
+        const i = pacientes.value.findIndex((pacienteState) => {
+            return pacienteState.id === paciente.id;
+            
+        });
+        console.log( pacientes.value[i]);
+        console.log({...paciente});
+        pacientes.value[i]={...paciente}
+    } else {
+        pacientes.value.push({ ...paciente, id: uid() });
+        //Objetc.asssign sirve para  recorrer un objeto y cambiar sus valores es como usar paciente.nombre =""
+    }
     Object.assign(paciente, {
         nombre: "",
         propietario: "",
         email: "",
         alta: "",
         sintomas: "",
+        id: null,
     });
 };
 
-const actualizarPaciente = (paciente) => {
-    console.log("Actualizando");
-    console.log(paciente);
+const actualizarPaciente = (id) => {
+    console.log(id);
+    const pacienteEditar = pacientes.value.filter(
+        (paciente) => paciente.id === id
+    )[0];
+    console.log(pacienteEditar);
+    Object.assign(paciente, pacienteEditar);
 };
 </script>
 

@@ -20,11 +20,10 @@ const guardarPaciente = () => {
         console.log(paciente.id);
         const i = pacientes.value.findIndex((pacienteState) => {
             return pacienteState.id === paciente.id;
-            
         });
-        console.log( pacientes.value[i]);
-        console.log({...paciente});
-        pacientes.value[i]={...paciente}
+        console.log(pacientes.value[i]);
+        console.log({ ...paciente });
+        pacientes.value[i] = { ...paciente };
     } else {
         pacientes.value.push({ ...paciente, id: uid() });
         //Objetc.asssign sirve para  recorrer un objeto y cambiar sus valores es como usar paciente.nombre =""
@@ -54,6 +53,7 @@ const actualizarPaciente = (id) => {
         <Header />
         <div class="mt-12 md:flex">
             <Formulario
+                :id="paciente.id"
                 v-model:nombre="paciente.nombre"
                 v-model:propietario="paciente.propietario"
                 v-model:email="paciente.email"

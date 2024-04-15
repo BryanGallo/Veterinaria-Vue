@@ -5,7 +5,7 @@ const props = defineProps({
         required: true,
     },
 });
-defineEmits(["actualizar-paciente"]);
+defineEmits(["actualizar-paciente","eliminarPaciente"]);
 </script>
 <template>
     <div class="mx-5 my-10 bg-white shadow-md px-5 py-10 rounded-xl">
@@ -55,6 +55,7 @@ defineEmits(["actualizar-paciente"]);
             <button
                 type="button"
                 class="block w-full py-2 px-10 bg-red-600 hover:bg-red-700 text-white font-bold uppercase rounded-lg"
+                @click="$emit('eliminar-paciente',paciente.id)"
             >
                 Eliminar
             </button>

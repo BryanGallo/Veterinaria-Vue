@@ -1,7 +1,7 @@
 <script setup>
 import Paciente from "./Paciente.vue";
 
-defineEmits(["actualizar-paciente"]);
+defineEmits(["actualizar-paciente", "eliminarPaciente"]);
 const props = defineProps({
     pacientes: {
         type: Array,
@@ -24,9 +24,8 @@ const props = defineProps({
             <Paciente
                 v-for="paciente in pacientes"
                 :paciente="paciente"
-                @actualizar-paciente="
-                    (id) => $emit('actualizar-paciente', id)
-                "
+                @actualizar-paciente="(id) => $emit('actualizar-paciente', id)"
+                @eliminar-paciente="(id) => $emit('eliminar-paciente', id)"
             />
         </div>
         <p v-else class="text-center text-2xl mt-10">

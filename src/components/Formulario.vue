@@ -67,6 +67,7 @@ const validar = () => {
 };
 
 const editando = computed(() => {
+    console.log(props.id);
     return props.id;
 });
 </script>
@@ -186,7 +187,7 @@ const editando = computed(() => {
             <input
                 type="submit"
                 class="bg-indigo-600 w-full p-3 text-white uppercase font-bold hover:bg-indigo-700 cursor-pointer transition-colors"
-                :value="[editando ? 'Registrar Paciente' : 'Editando Paciente']"
+                :value="[editando ? 'Editar Paciente' : 'Registrar Paciente']"
             />
         </form>
     </div>
